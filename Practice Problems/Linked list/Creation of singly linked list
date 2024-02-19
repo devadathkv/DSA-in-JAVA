@@ -1,3 +1,4 @@
+
 public class Main
 {
     public static class Node{
@@ -8,28 +9,103 @@ public class Main
         }
     }
     
-    
-    public static class Linkedlist{
+    public static class LinkedList{
+        
         Node head=null;
         Node tail=null;
         
         void insertAtEnd(int data){
-            Node temp = new Node(data);
+            Node newnode = new Node(data);
             if(head==null){
-                head=temp;
-                tail=temp;
+                head=newnode;
+                tail=newnode;
             }
             else{
-                tail.next=temp;
-                tail=temp;
+                tail.next=newnode;
+                tail=newnode;
             }
         }
         
+        void insertAtFront(int data){
+            Node newnode = new Node(data);
+            if(head==null){
+                head=newnode;
+                tail=newnode;
+            }
+            else{
+                newnode.next=head;
+                head=newnode;
+            }
+        }
+        
+        void insertAtposition(int data, int pos){
+            Node newnode = new Node(data);
+            Node temp=head;
+            if(pos==0){
+                insertAtFront(data);
+            }
+            else{
+                for(int i=0;i<pos-1;i++){
+                    temp=temp.next;
+                }
+                newnode.next=temp.next;
+                temp.next=newnode;
+            }
+        }
+        
+        
+        void deleteFront(){
+            if(head==null){
+                return;
+            }
+            else if(head.next==null){
+                head=null;
+                tail=null;
+            }
+            else{
+                head=head.next;
+            }
+        }
+        
+        
+        void deleteLast(){
+            if(head==null){
+                return;
+            }
+            else if(head.next==null){
+                head=null;
+                tail=null;
+            }
+            else{
+                Node secondlast = head;
+                Node last=head.next;
+                while(last.next!=null){
+                    last=last.next;
+                    secondlast=secondlast.next;
+                }
+                secondlast.next=null;
+            }
+        }
+        
+        void deleteAtPos(int pos){
+            if(pos==0){
+                deleteFront();
+            }
+            else if(head.next==null){
+                head=null;
+                tail=null;
+            }
+            else{
+                
+            }
+        }
+        
+        
         void display(){
-            Node temp1=head;
-            while(temp1!=null){
-                System.out.println(temp1.data + " ");
-                temp1=temp1.next;
+            Node temp=head;
+            while(temp!=null){
+                System.out.print(temp.data+" ");
+                temp=temp.next;
             }
         }
         
@@ -37,8 +113,16 @@ public class Main
     
     
 	public static void main(String[] args) {
-		Linkedlist ll = new Linkedlist();
-		ll.insertAtEnd(5);
+		LinkedList ll = new LinkedList();
+		ll.insertAtEnd(4);
+		ll.insertAtEnd(14);
+		ll.insertAtEnd(24);
+		ll.insertAtEnd(34);
+		//ll.insertAtFront(1);
+		ll.insertAtposition(100,2);
+		ll.deleteFront();
+		//ll.deleteLast();
+		ll.deleteAtPos(2);
 		ll.display();
 	}
 }
