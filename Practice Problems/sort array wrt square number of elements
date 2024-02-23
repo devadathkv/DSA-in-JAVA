@@ -1,0 +1,48 @@
+public class Main {
+    public static void swap(int[] ans, int l, int r) {
+        int temp = ans[l];
+        ans[l] = ans[r];
+        ans[r] = temp;
+    }
+
+    public static int[] reverse(int ans[]) {
+        int l = 0;
+        int r = 5;
+        while (l < r) {
+            swap(ans, l, r);
+            l++;
+            r--;
+        }
+        return ans;
+    }
+
+    public static void sort(int arr[], int n) {
+        int left = 0;
+        int right = n - 1;
+        int[] ans = new int[6];
+        int i = 0;
+        while (left <= right) {
+            int a = arr[left] * arr[left];
+            int b = arr[right] * arr[right];
+            if (a > b) {
+                ans[i] = a;
+                i++;
+                left++;
+            } else {
+                ans[i] = b;
+                i++;
+                right--;
+            }
+        }
+        int[] anss = reverse(ans);
+        for (int k = 0; k < i; k++) {
+            System.out.print(anss[k] + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {-10, -6, -3, 4, 5, 12};
+        int n = 6;
+        sort(arr, n);
+    }
+}
